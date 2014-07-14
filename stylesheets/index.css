@@ -1,0 +1,152 @@
+/* line 17, ../../../../../../Ruby193/lib/ruby/gems/1.9.1/gems/compass-0.12.6/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  font-size: 100%;
+  vertical-align: baseline;
+}
+
+/* line 22, ../../../../../../Ruby193/lib/ruby/gems/1.9.1/gems/compass-0.12.6/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+html {
+  line-height: 1;
+}
+
+/* line 24, ../../../../../../Ruby193/lib/ruby/gems/1.9.1/gems/compass-0.12.6/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+ol, ul {
+  list-style: none;
+}
+
+/* line 26, ../../../../../../Ruby193/lib/ruby/gems/1.9.1/gems/compass-0.12.6/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* line 28, ../../../../../../Ruby193/lib/ruby/gems/1.9.1/gems/compass-0.12.6/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+caption, th, td {
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle;
+}
+
+/* line 30, ../../../../../../Ruby193/lib/ruby/gems/1.9.1/gems/compass-0.12.6/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+q, blockquote {
+  quotes: none;
+}
+/* line 103, ../../../../../../Ruby193/lib/ruby/gems/1.9.1/gems/compass-0.12.6/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+q:before, q:after, blockquote:before, blockquote:after {
+  content: "";
+  content: none;
+}
+
+/* line 32, ../../../../../../Ruby193/lib/ruby/gems/1.9.1/gems/compass-0.12.6/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+a img {
+  border: none;
+}
+
+/* line 116, ../../../../../../Ruby193/lib/ruby/gems/1.9.1/gems/compass-0.12.6/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary {
+  display: block;
+}
+
+/* line 8, ../sass/index.scss */
+body {
+  background-color: #eeeeee;
+  font-family: helvetica, arial;
+}
+
+/* line 12, ../sass/index.scss */
+.header {
+  background-color: #000000;
+  color: #ffffff;
+  width: 100%;
+  padding: 10px 30px 10px 30px;
+  vertical-align: middle;
+}
+/* line 18, ../sass/index.scss */
+.header .innerHeader {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto 0 auto;
+}
+/* line 23, ../sass/index.scss */
+.header .title {
+  font-size: 40px;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+/* line 29, ../sass/index.scss */
+.sample {
+  width: 100%;
+}
+/* line 31, ../sass/index.scss */
+.sample .photosExp {
+  width: 50%;
+  text-align: right;
+  font-size: 10px;
+  max-width: 1280px;
+  margin: 5px auto 0 auto;
+}
+
+/* line 39, ../sass/index.scss */
+#tiles {
+  max-width: 1280px;
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* line 45, ../sass/index.scss */
+.texts {
+  width: 100%;
+}
+/* line 47, ../sass/index.scss */
+.texts .exp {
+  width: 100%;
+  max-width: 1280px;
+  margin: 20px auto 0 auto;
+}
+/* line 52, ../sass/index.scss */
+.texts .exp h3 {
+  font-size: 30px;
+}
+/* line 56, ../sass/index.scss */
+.texts .exp pre {
+  font-family: 'Monaco', 'Consolas', 'Courier New', Courier, monospace, sans-serif;
+  background-color: #ffffff;
+  padding: 3px;
+}
+
+/* line 63, ../sass/index.scss */
+.featuresList {
+  list-style-type: disc;
+  margin-left: 30px;
+}
+
+/* line 67, ../sass/index.scss */
+.installProcess {
+  margin: 0 10px 0 10px;
+}
+/* line 69, ../sass/index.scss */
+.installProcess li {
+  margin: 20px auto 0 auto;
+}
+/* line 72, ../sass/index.scss */
+.installProcess li pre {
+  margin: 5px 0 5px 0;
+}
