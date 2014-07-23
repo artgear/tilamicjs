@@ -1,6 +1,10 @@
 /**
  * tilamic.js
- * development version. 
+ * ver. 1.0.0
+ * 
+ * Copyright 2014 Artgear
+ * http://d.hatena.ne.jp/artgear/
+ * https://github.com/artgear/tilamicjs
  * 
  * This software is released under the MIT License.
  */
@@ -33,6 +37,9 @@
 	
 	// check IE6, 7
 	var isVeryOldBrowser = document.all && !document.querySelectorAll;
+	
+	// check IE6, 7, 8
+	var isOldBrowser = document.all && !document.addEventListener;
 	
 	 // Tile object controls only 1 tile.
 	 // Tile object is a part of Tilamic object.
@@ -208,7 +215,7 @@
 	};
 	
 	var AltTile = function(selector, options){
-		// This object is provided for old browsers compatibility.
+		// This object provides compatibility with old browsers.
 		// If the browser doesn't support CSS3 features,
 		// Tilamic constructor use this instead of Tile object.
 		var $ele = this.$ele = $(selector);
@@ -305,6 +312,7 @@
 	};
 	
 	AltTile.prototype.fade = function(imgID){
+		// fallback method of flip for non CSS3 browsers 
 		$ele = this.$ele;
 		var faceClass = this.classNames['face'];
 		var backClass = this.classNames['back'];
@@ -317,10 +325,26 @@
 		this._currentImgID = imgID;
 	};
 	
+	AltTile.prototype.replace = function(imgID){
+		// fallback method of flip for IE 6, 7 ,8
+		$ele = this.$ele;
+		var faceClass = this.classNames['face'];
+		
+		$ele.find('.' + faceClass).attr('src', this.imgPaths[imgID]);
+		
+		this._currentImgID = imgID;
+	};
+	
 	AltTile.prototype.flip = function(imgID, isAxisX, isReverse){
 		// This method doesn't flip the tile practically.
 		// For compatibility with Tile object, Tilamic object calls this.
-		this.fade(imgID); // fallback
+		if(isOldBrowser){
+			// IE 6, 7, 8
+			this.replace(imgID);
+			return;
+		}
+		// IE 9
+		this.fade(imgID);
 	};
 	
 	var Tilamic = function(selector, options){
@@ -328,6 +352,7 @@
 		var $firstImg = $ele.find('img').eq(0);
 		
 		// 'aspectRatio' is for resizing. If you want to make with responsive design, this option is required.
+		// 'aspectRatio' doesn't work fine on IE 6. So tilamic.js doesn't support IE 6 officially.
 		var defaultOptions = {
 			'rows': 3,
 			'cols': 3,
@@ -439,26 +464,38 @@
 		});
 	};
 	
-	Tilamic.prototype.flip = function(imgID, isAxisX, isReverse){
+	Tilamic.prototype.flip = function(imgID, options){
 		// All of 'isActive' tiles flip in unison.
+		var defaultOptions = {
+			'isAxisX': false,
+			'isReverse': false
+		};
+		options = $.extend({}, defaultOptions, options);
 		this._controlOrigin();
 		$.each(this.tiles, function(index, val){
 			if(val['isActive']){
-				val['tileObject'].flip(imgID, isAxisX, isReverse);
+				val['tileObject'].flip(imgID, options['isAxisX'], options['isReverse']);
 			}
 		});
 	};
 	
-	Tilamic.prototype.seqFlip = function(imgID, delay, isAxisX, isZtoA, isReverse){
+	Tilamic.prototype.seqFlip = function(imgID, options){
 		// All of 'isActive' tiles flip in sequence.
+		var defaultOptions = {
+			'delay': 100,
+			'isAxisX': false,
+			'isReverse': false,
+			'isZtoA': false
+		};
+		options = $.extend({}, defaultOptions, options);
 		this._controlOrigin();
-		var activeIndex = isZtoA ? this.tiles.length : 0;
+		var activeIndex = options['isZtoA'] ? this.tiles.length : 0;
 		$.each(this.tiles, function(index, val){
 			if(val['isActive']){
 				setTimeout(function(){
-					val['tileObject'].flip(imgID, isAxisX, isReverse);
-				}, activeIndex * delay);
-				isZtoA ? activeIndex-- : activeIndex++;
+					val['tileObject'].flip(imgID, options['isAxisX'], options['isReverse']);
+				}, activeIndex * options['delay']);
+				options['isZtoA'] ? activeIndex-- : activeIndex++;
 			};
 		});
 	};
@@ -468,6 +505,9 @@
 		var ret = $.extend(true, {}, this);
 		var tiles = ret.tiles;
 		$.each(tiles, function(index, val){
+			if(!val['isActive']){
+				return;
+			};
 			val['isActive'] = expr(index, val['col'], val['row']);
 		});
 		return ret;
@@ -506,10 +546,10 @@
 				}
 			};
 		}(this);
-		if(!(keyword in computeOrigin)){
-			return this;
-		};
 		var ret = $.extend(true, {}, this);
+		if(!(keyword in computeOrigin) || !this.options['isCSS3Supported']){
+			return ret;
+		};
 		var tiles = ret.tiles;
 		$.each(tiles, function(index, val){
 			val['origin-x'] = computeOrigin[keyword](true, val['col'], val['row']);
@@ -563,6 +603,12 @@
 	Tilamic.prototype.getCurrentImgID = function(index){
 		// return the ID of selected image of the tile. 
 		index = index || 0;
+		if(index < 0){
+			index = index + this.tiles.length;
+		};
+		if(!(0 <= index && index < this.tiles.length)){
+			throw new Error('Index Error');
+		};
 		return this.tiles[index]['tileObject'].getCurrentImgID();
 	};
 	
@@ -583,7 +629,7 @@
 		});
 	};
 	
-	window.Tile = Tile;
-	window.AltTile = AltTile;
+	// window.Tile = Tile;
+	// window.AltTile = AltTile;
 	window.Tilamic = Tilamic;
 })(window, jQuery);
