@@ -350,7 +350,6 @@
 	
 	var Tilamic = function(selector, options){
 		var $ele = this.$ele = $(selector);
-		var $firstImg = $ele.find('img').eq(0);
 		
 		// 'aspectRatio' is for resizing. If you want to make with responsive design, this option is required.
 		// 'aspectRatio' doesn't work fine on IE 6. So tilamic.js doesn't support IE 6 officially.
