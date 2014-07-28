@@ -1,7 +1,7 @@
 /**
  * @license
  * tilamic.js
- * ver. 1.0.0
+ * ver. 1.0.1
  * 
  * Copyright 2014 Artgear
  * http://d.hatena.ne.jp/artgear/
@@ -452,7 +452,7 @@
 		};
 	};
 	
-	Tilamic.prototype._controlOrigin = function(keyword){
+	Tilamic.prototype._controlOrigin = function(){
 		// Internal method. Setup the css transform-origin of 'isActive' tiles.
 		$.each(this.tiles, function(index, val){
 			if(val['isActive']){
