@@ -10,3 +10,6 @@ See [DEMO](http://tilamic.appspot.com/)
 
 ### How to install
 see <http://tilamic.appspot.com/>
+
+### License
+This software is released under the MIT License.
